@@ -1,0 +1,12 @@
+{
+    "runtime": {
+        "majorVersion": "8"
+    },
+    "command": "java -jar webflux-demo-0.0.1-SNAPSHOT.jar",
+    "release": {
+        "build": "1",
+        "commit": "d8c2596364d9584050461",
+        "version": "1.0"
+    },
+    "notes": "Sample Reactive App"
+} 
