@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: webflux-demo
+  name: webflux-demo
+spec:
+  replicas: 1 # tells deployment to run 1 pods matching the template
+  selector:
+    matchLabels:
+      run: webflux-demo-exposed
+  template:
+    metadata:
+      labels:
+        run: webflux-demo-exposed
+    spec:
+      containers:
+      - image: 192.168.99.100:5000/webflux-demo
+        name: webflux-demo
+        ports:
+        - containerPort: 80
+          protocol: TCP
+      imagePullSecrets:
+        - name: my-secret
+
+---
+
+# APP SERVICE
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: webflux-demo
+  name: webflux-demo
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: webflux-demo-exposed
+  type: NodePort
